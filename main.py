@@ -96,26 +96,28 @@ class Enemy:
         if self.y > 540:
             return True
         return False
-    
-class GameOver:
-    def __init__(self):
-        pass
 
+        
 
-player = Player(368)
-enemy = Enemy(random.randint(0, 736), random.randint(0, 236))
-bullet = Bullet(player.x + 16, player.y)
-enemies = []
-for i in range(6):
-    enemy_x = random.randint(0, 736)
-    enemy_y = random.randint(0, 236)
-    enemies.append(Enemy(enemy_x + i*10, enemy_y))
+def start():
+    game_over = False
+    player = Player(368)
+    enemy = Enemy(random.randint(0, 736), random.randint(0, 236))
+    bullet = Bullet(player.x + 16, player.y)
+    enemies = []
+    for i in range(6):
+        enemy_x = random.randint(0, 736)
+        enemy_y = random.randint(0, 236)
+        enemies.append(Enemy(enemy_x + i*10, enemy_y))
 
 
 
 
 game_over_font = pygame.font.Font('freesansbold.ttf', 64)
 game_over_txt = game_over_font.render('GAME OVER', True, (255, 0, 0))
+
+restart = game_over_font.render('Restart', True, (255,255,255))
+exit = game_over_font.render('Exit', True, (255,255,255))
 game_over = False
 
 
@@ -166,8 +168,17 @@ while running:
             enemy.x = random.randint(0, 736)
             enemy.y = random.randint(0, 236)
     if game_over:
-        screen.blit(game_over_txt, (200, 250))
+        screen.blit(game_over_txt, (300, 250))
+        screen.blit(restart, (500, 300))
+        screen.blit(exit, (100,300))
         enemies.clear()
+        
+        distance_r = math.sqrt((500 - bullet.x) ** 2 + (300 - bullet.y) ** 2)
+        distance_e = math.sqrt((100 - bullet.x) ** 2 + (300 - bullet.y) ** 2)
+        if distance_r < 516:
+            start()
+        elif distance_e < 516:
+            running = False
 
     bullet.move()
     
