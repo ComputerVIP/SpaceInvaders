@@ -7,9 +7,13 @@ What is the purpose of the "While running" loop?
 How do you create a screen in pygame?
     pygame.display.set_mode((width, height))
 How are objects placed on the screen in pygame?
+    blit()
 What events can I listen for in pygame? What do those events do?
+    Quit, Keydown, Keyup, Mousebuttondown
 How can I detect collision with pygame?
+    Using rects and the colliderect() method
 How do you add sounds in pygame?
+    pygame.mixer
 '''
 
 
