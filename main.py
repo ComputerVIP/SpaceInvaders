@@ -123,10 +123,9 @@ class Enemy:
             self.y += self.y_change
 
     def is_hit(self, bullet):
-        distance = math.sqrt((self.x - bullet.x) ** 2 + (self.y - bullet.y) ** 2)
-        if distance < 48:
-            return True
-        return False
+        bullet_rect = bullet.get_rect()
+        enemy_rect = self.image.get_rect(topleft=(self.x, self.y))
+        return bullet_rect.colliderect(enemy_rect)
     
     def check_game_over(self):
         if self.y > 540:
